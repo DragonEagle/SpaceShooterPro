@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(randomX, 8f,0f);
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.tag == "Player")
         {

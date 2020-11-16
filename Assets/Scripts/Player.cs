@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     private float _canFire = -1f;
 
+    public int Lives { get { return _lives; } }
+
     // Start is called before the first frame update
     void Start()
     {

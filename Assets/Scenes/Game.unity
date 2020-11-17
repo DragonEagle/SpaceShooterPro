@@ -150,12 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f45b9cfd424d3846b17e70d6ebce181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 254351131966073557, guid: 8911fffa5fd308144befe90def61195f, type: 3}
+  _enemy: {fileID: 254351131966073557, guid: ff54245e32fdcbd4d9e65934f520efae, type: 3}
   _enemyDelay: 5
   _enemyContainer: {fileID: 1220659750}
   _minPowerupDelay: 3
   _maxPowerupDelay: 7
-  _powerUp: {fileID: 8354153794925995309, guid: 065399390672e844a86c0b2b33b23a26,
+  _powerUp: {fileID: 8354153794925995309, guid: c6b1ea6501ca75141bf0ab41eecfc987,
     type: 3}
   player: {fileID: 1225708548}
 --- !u!4 &788021613

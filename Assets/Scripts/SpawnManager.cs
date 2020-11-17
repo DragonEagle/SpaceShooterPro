@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private float _maxPowerupDelay = 7f;
     [SerializeField]
-    private GameObject _powerUp;
+    private GameObject[] _powerUps;
     [SerializeField]
     private Player player;
 
@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(randomTime);
             float randomX = Random.Range(-9.5f, 9.5f);
             Vector3 position = new Vector3(randomX, 8f, 0f);
-            Instantiate(_powerUp, position, Quaternion.identity);
+            Instantiate(_powerUps[Random.Range(0,_powerUps.Length)], position, Quaternion.identity);
         }
     }
 }

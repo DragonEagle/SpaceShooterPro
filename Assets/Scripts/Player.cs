@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
     [SerializeField]
+    private float _boostedSpeed = 8.5f;
+    [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
     private float _fireRate = 0.15f;
@@ -19,7 +21,10 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
     [SerializeField]
     private float _tripleShotDuration = 5f;
+    [SerializeField]
+    private float _speedBoostDuration = 5f;
 
+    private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
 
     public int Lives { get { return _lives; } }
@@ -48,7 +53,16 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 moveVector = new Vector3(horizontalInput, verticalInput, 0);
-        transform.Translate(moveVector * _speed * Time.deltaTime);
+
+        if (_isSpeedBoost)
+        {
+            moveVector *= _boostedSpeed;
+        }
+        else
+        {
+            moveVector *= _speed;
+        }
+        transform.Translate(moveVector * Time.deltaTime);
 
         if (transform.position.x > 11.3f)
         {
@@ -95,5 +109,15 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_tripleShotDuration);
         _isTripleShot = false;
+    }
+    public void ActivateSpeedBoost()
+    {
+        _isSpeedBoost = true;
+        StartCoroutine(CooldownSpeedBoost());
+    }
+    IEnumerator CooldownSpeedBoost()
+    {
+        yield return new WaitForSeconds(_speedBoostDuration);
+        _isSpeedBoost = false;
     }
 }

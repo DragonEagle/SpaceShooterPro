@@ -7,9 +7,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemy;
     [SerializeField]
-    private float _delay=5f;
+    private float _enemyDelay=5f;
     [SerializeField]
     private GameObject _enemyContainer;
+    [SerializeField]
+    private float _minPowerupDelay = 3f;
+    [SerializeField]
+    private float _maxPowerupDelay = 7f;
+    [SerializeField]
+    private GameObject _powerUp;
     [SerializeField]
     private Player player;
 
@@ -17,6 +23,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnPowerups());
     }
 
     IEnumerator SpawnEnemies()
@@ -27,7 +34,17 @@ public class SpawnManager : MonoBehaviour
             Vector3 position = new Vector3(randomX, 8f, 0f);
             GameObject enemy = Instantiate(_enemy, position, Quaternion.identity);
             enemy.transform.SetParent(_enemyContainer.transform);
-            yield return new WaitForSeconds(_delay);
+            yield return new WaitForSeconds(_enemyDelay);
+        }
+    }
+    IEnumerator SpawnPowerups()
+    {
+        while(player.Lives > 0) {
+            float randomTime = Random.Range(_minPowerupDelay, _maxPowerupDelay);
+            yield return new WaitForSeconds(randomTime);
+            float randomX = Random.Range(-9.5f, 9.5f);
+            Vector3 position = new Vector3(randomX, 8f, 0f);
+            Instantiate(_powerUp, position, Quaternion.identity);
         }
     }
 }

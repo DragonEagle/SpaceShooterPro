@@ -151,8 +151,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 254351131966073557, guid: 8911fffa5fd308144befe90def61195f, type: 3}
-  _delay: 5
+  _enemyDelay: 5
   _enemyContainer: {fileID: 1220659750}
+  _minPowerupDelay: 3
+  _maxPowerupDelay: 7
+  _powerUp: {fileID: 8354153794925995309, guid: 065399390672e844a86c0b2b33b23a26,
+    type: 3}
   player: {fileID: 1225708548}
 --- !u!4 &788021613
 Transform:
@@ -327,6 +331,9 @@ MonoBehaviour:
   _laserPrefab: {fileID: 4251387107561700170, guid: c980fdb9a129f4147a23ff60da2fee6a,
     type: 3}
   _fireRate: 0.15
+  _tripleShotPrefab: {fileID: 8896599801846454706, guid: cbb1c755aa93d224eb662c317e36d4d3,
+    type: 3}
+  _tripleShotDuration: 5
 --- !u!212 &1225708549
 SpriteRenderer:
   m_ObjectHideFlags: 0

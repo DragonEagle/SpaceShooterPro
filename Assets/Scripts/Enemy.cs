@@ -6,7 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
+    private Player _player;
 
+    private void Start()
+    {
+        _player = FindObjectOfType<Player>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,6 +37,10 @@ public class Enemy : MonoBehaviour
         else if (other.transform.tag == "Laser")
         {
             Destroy(other.gameObject);
+            if (_player)
+            {
+                _player.AddToScore(10);
+            }
             Destroy(gameObject);
         }
     }

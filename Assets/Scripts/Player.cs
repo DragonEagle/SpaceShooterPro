@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
+    private int _score=0;
+    [SerializeField]
     private float _speed = 3.5f;
     [SerializeField]
     private float _boostedSpeed = 8.5f;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     private bool _isShieldsActive = false;
 
     public int Lives { get { return _lives; } }
+    public int Score { get { return _score; } }
 
     // Start is called before the first frame update
     void Start()
@@ -135,5 +138,9 @@ public class Player : MonoBehaviour
     {
         _isShieldsActive = true;
         _shieldVisual.SetActive(true);
+    }
+    public void AddToScore(int amount)
+    {
+        _score += amount;
     }
 }

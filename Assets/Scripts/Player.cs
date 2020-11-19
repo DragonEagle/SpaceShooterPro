@@ -28,7 +28,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _shieldVisual;
 
-
+    [Header("Damage Indicators")]
+    [SerializeField]
+    private GameObject _rightEngineFire;
+    [SerializeField]
+    private GameObject _leftEngineFire;
 
     private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
@@ -112,6 +116,12 @@ public class Player : MonoBehaviour
         if (_lives == 0)
         {
             Destroy(gameObject);
+        } else if (_lives == 2)
+        {
+            _rightEngineFire.SetActive(true);
+        } else if (_lives == 1)
+        {
+            _leftEngineFire.SetActive(true);
         }
     }
     public void ActivateTripleShot()

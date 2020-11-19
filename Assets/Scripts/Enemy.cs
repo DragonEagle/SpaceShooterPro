@@ -7,10 +7,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
     private Player _player;
+    private Animator _anim;
 
     private void Start()
     {
         _player = FindObjectOfType<Player>();
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,8 +33,12 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            //Damage player
-            Destroy(gameObject);
+            _speed = 0;
+            if (_anim)
+            {
+                _anim.SetTrigger("OnEnemyDeath");
+            }
+            Destroy(gameObject, 2.37f);
         }
         else if (other.transform.tag == "Laser")
         {
@@ -41,7 +47,12 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddToScore(10);
             }
-            Destroy(gameObject);
+            _speed = 0;
+            if (_anim)
+            {
+                _anim.SetTrigger("OnEnemyDeath");
+            }
+            Destroy(gameObject, 2.37f);
         }
     }
 }

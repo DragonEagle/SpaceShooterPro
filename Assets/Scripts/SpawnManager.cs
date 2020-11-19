@@ -22,14 +22,17 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+    public void StartSpawning()
+    {
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnPowerups());
     }
-
     IEnumerator SpawnEnemies()
     {
         while (player.Lives > 0)
         {
+            yield return new WaitForSeconds(3.0f);
             float randomX = Random.Range(-9.5f, 9.5f);
             Vector3 position = new Vector3(randomX, 8f, 0f);
             GameObject enemy = Instantiate(_enemy, position, Quaternion.identity);

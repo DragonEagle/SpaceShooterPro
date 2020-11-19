@@ -23,9 +23,14 @@ public class Player : MonoBehaviour
     private float _tripleShotDuration = 5f;
     [SerializeField]
     private float _speedBoostDuration = 5f;
+    [SerializeField]
+    private GameObject _shieldVisual;
+
+
 
     private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
+    private bool _isShieldsActive = false;
 
     public int Lives { get { return _lives; } }
 
@@ -94,6 +99,12 @@ public class Player : MonoBehaviour
     }
     public void Damage() 
     {
+        if (_isShieldsActive)
+        {
+            _isShieldsActive = false;
+            _shieldVisual.SetActive(false);
+            return;
+        }
         _lives--;
         if (_lives == 0)
         {
@@ -119,5 +130,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_speedBoostDuration);
         _isSpeedBoost = false;
+    }
+    public void ActivateShields()
+    {
+        _isShieldsActive = true;
+        _shieldVisual.SetActive(true);
     }
 }

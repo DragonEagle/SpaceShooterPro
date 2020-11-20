@@ -44,7 +44,8 @@ public class Enemy : MonoBehaviour
             {
                 _audioSource.Play();
             }
-            Destroy(gameObject, 2.37f);
+            Destroy(GetComponent<Collider2D>());
+            Destroy(gameObject, 2.5f);
         }
         else if (other.transform.tag == "Laser")
         {
@@ -62,7 +63,8 @@ public class Enemy : MonoBehaviour
             {
                 _audioSource.Play();
             }
-            Destroy(gameObject, 2.37f);
+            Destroy(GetComponent<Collider2D>());
+            Destroy(gameObject, 2.5f);
         }
     }
 }

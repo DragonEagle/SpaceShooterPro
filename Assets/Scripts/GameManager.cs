@@ -21,10 +21,12 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+#if UNITY_STANDALONE // Application.Quit will crash a non-standalone player
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
+#endif
     }
     public void GameOver()
     {

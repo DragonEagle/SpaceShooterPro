@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
+    [SerializeField]
+    private GameObject _laserPrefab;
     private Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
@@ -15,6 +17,7 @@ public class Enemy : MonoBehaviour
         _player = FindObjectOfType<Player>();
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        StartCoroutine(RandomShoot());
     }
 
     // Update is called once per frame
@@ -66,5 +69,15 @@ public class Enemy : MonoBehaviour
             Destroy(GetComponent<Collider2D>());
             Destroy(gameObject, 2.5f);
         }
+    }
+    IEnumerator RandomShoot()
+    {
+        while (true)
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, -1.4f, 0), Quaternion.identity);
+            float randomWait = Random.Range(3f,7f);
+            yield return new WaitForSeconds(randomWait);
+        }
+
     }
 }

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
+    private bool _canFire = true;
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class Enemy : MonoBehaviour
             {
                 _audioSource.Play();
             }
+            _canFire = false;
             Destroy(GetComponent<Collider2D>());
             Destroy(gameObject, 2.5f);
         }
@@ -66,6 +68,7 @@ public class Enemy : MonoBehaviour
             {
                 _audioSource.Play();
             }
+            _canFire = false;
             Destroy(GetComponent<Collider2D>());
             Destroy(gameObject, 2.5f);
         }
@@ -74,7 +77,10 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, -1.4f, 0), Quaternion.identity);
+            if (_canFire)
+            {
+                Instantiate(_laserPrefab, transform.position + new Vector3(0, -1.4f, 0), Quaternion.identity);
+            }
             float randomWait = Random.Range(3f,7f);
             yield return new WaitForSeconds(randomWait);
         }

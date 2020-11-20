@@ -606,6 +606,7 @@ MonoBehaviour:
   - {fileID: 8354153794925995309, guid: c6b1ea6501ca75141bf0ab41eecfc987, type: 3}
   - {fileID: 7313891070460461204, guid: a4622e9a9ace9cf47a70e3814aa81301, type: 3}
   - {fileID: 8531644496979565112, guid: 45d7355af4deea94897497cfeed174ae, type: 3}
+  - {fileID: 677269388128894404, guid: 31a6526b61224bb4f8387f75ad038ed7, type: 3}
   player: {fileID: 1225708548}
 --- !u!4 &788021613
 Transform:
@@ -1033,6 +1034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lives: 3
   _ammo: 15
+  _maxAmmo: 15
   _speed: 5
   _boostedSpeed: 8.5
   _trusterMultiplier: 1.5

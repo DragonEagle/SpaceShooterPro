@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private int _lives = 3;
     [SerializeField]
     private int _ammo = 15;
+    [SerializeField]
+    private int _maxAmmo = 15;
     private int _score=0;
     private int _shields = 0;
     [SerializeField]
@@ -181,6 +183,14 @@ public class Player : MonoBehaviour
         //        _isShieldsActive = true;
         _shields = 3;
         _shieldVisual.SetActive(true);
+    }
+    public void AddToAmmo(int amount)
+    {
+        _ammo += amount;
+        if (_ammo > _maxAmmo)
+        {
+            _ammo = _maxAmmo;
+        }
     }
     public void AddToScore(int amount)
     {

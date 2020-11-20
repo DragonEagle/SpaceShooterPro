@@ -192,6 +192,21 @@ public class Player : MonoBehaviour
             _ammo = _maxAmmo;
         }
     }
+    public void IncreaseHealth()
+    {
+        if (_lives < 3)
+        {
+            _lives++;
+            if (Lives == 3)
+            {
+                _rightEngineFire.SetActive(false);
+            }
+            else if (_lives == 2)
+            {
+                _leftEngineFire.SetActive(false);
+            }
+        }
+    }
     public void AddToScore(int amount)
     {
         _score += amount;

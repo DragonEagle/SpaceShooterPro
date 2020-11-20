@@ -6,8 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private int _lives = 3;
-    [SerializeField]
     private int _score=0;
+    private int _shields = 0;
     [SerializeField]
     private float _speed = 3.5f;
     [SerializeField]
@@ -42,12 +42,13 @@ public class Player : MonoBehaviour
 
     private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
-    private bool _isShieldsActive = false;
+//    private bool _isShieldsActive = false;
 
     private AudioSource audioSource;
 
     public int Lives { get { return _lives; } }
     public int Score { get { return _score; } }
+    public int Shields { get { return _shields; } }
 
     // Start is called before the first frame update
     void Start()
@@ -128,10 +129,13 @@ public class Player : MonoBehaviour
     }
     public void Damage() 
     {
-        if (_isShieldsActive)
+        if (_shields > 0)
         {
-            _isShieldsActive = false;
-            _shieldVisual.SetActive(false);
+            _shields --;
+            if(_shields == 0)
+            {
+                _shieldVisual.SetActive(false);
+            }
             return;
         }
         _lives--;
@@ -170,7 +174,8 @@ public class Player : MonoBehaviour
     }
     public void ActivateShields()
     {
-        _isShieldsActive = true;
+        //        _isShieldsActive = true;
+        _shields = 3;
         _shieldVisual.SetActive(true);
     }
     public void AddToScore(int amount)

@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
+    private Text _shieldsText;
+    [SerializeField]
     private Image _livesImage;
     [SerializeField]
     private Text _gameOverText;
@@ -24,6 +26,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         _scoreText.text = "Score: " + _player.Score;
+        _shieldsText.text = "Shields: " + _player.Shields;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _gameOver = false;
@@ -40,6 +43,10 @@ public class UIManager : MonoBehaviour
         if (_scoreText)
         {
             _scoreText.text = "Score: " + _player.Score;
+        }
+        if (_shieldsText)
+        {
+            _shieldsText.text = "Shields: " + _player.Shields;
         }
         if (_livesImage)
         {

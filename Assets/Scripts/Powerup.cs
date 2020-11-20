@@ -8,6 +8,12 @@ public class Powerup : MonoBehaviour
     private float _speed = 3f;
     [SerializeField]
     private int _powerupID; // 0= TripleShot 1=Speed 2=Shield
+    private AudioSource _audioSource;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,7 +47,10 @@ public class Powerup : MonoBehaviour
 
                 }
             }
-            Destroy(gameObject);
+            _audioSource.Play();
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(gameObject,1f);
         }
     }
 }

@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
+    private AudioClip _laserSound;
+    [SerializeField]
+    private AudioClip _explosionSound;
+    [SerializeField]
     private float _fireRate = 0.15f;
     private float _canFire = -1f;
 
@@ -38,6 +42,8 @@ public class Player : MonoBehaviour
     private bool _isTripleShot = false;
     private bool _isShieldsActive = false;
 
+    private AudioSource audioSource;
+
     public int Lives { get { return _lives; } }
     public int Score { get { return _score; } }
 
@@ -46,6 +52,13 @@ public class Player : MonoBehaviour
     {
         //  Take the current position == Start position (0,0,0)
         transform.position = new Vector3(0,0,0);
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource) {
+            Debug.LogError("The player doesn't have an audiosource");
+        } else
+        {
+            audioSource.clip = _laserSound;
+        }
     }
 
     // Update is called once per frame
@@ -103,6 +116,8 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0f, 1.1f, 0f), Quaternion.identity);
         }
+        audioSource.clip = _laserSound;
+        audioSource.Play();
     }
     public void Damage() 
     {
@@ -113,9 +128,11 @@ public class Player : MonoBehaviour
             return;
         }
         _lives--;
+        audioSource.clip = _explosionSound;
+        audioSource.Play();
         if (_lives == 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 2f);
         } else if (_lives == 2)
         {
             _rightEngineFire.SetActive(true);

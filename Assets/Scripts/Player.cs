@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _boostedSpeed = 8.5f;
     [SerializeField]
+    private float _trusterMultiplier = 1.5f;
+    [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
     private AudioClip _laserSound;
@@ -78,6 +80,11 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 moveVector = new Vector3(horizontalInput, verticalInput, 0);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveVector *= _trusterMultiplier;
+        }
 
         if (_isSpeedBoost)
         {

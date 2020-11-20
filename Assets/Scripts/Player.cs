@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     private int _ammo = 15;
     [SerializeField]
     private int _maxAmmo = 15;
+    [SerializeField]
+    private float _maxThrusters = 5f;
     private int _score=0;
     private int _shields = 0;
     [SerializeField]
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour
     private GameObject _rightEngineFire;
     [SerializeField]
     private GameObject _leftEngineFire;
+    private float _thrustersRemaining;
 
     private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
@@ -59,6 +62,7 @@ public class Player : MonoBehaviour
     public int Score { get { return _score; } }
     public int Shields { get { return _shields; } }
     public int Ammo { get { return _ammo; } }
+    public float Thrusters { get { return _thrustersRemaining / _maxThrusters; } }
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour
         {
             audioSource.clip = _laserSound;
         }
+        _thrustersRemaining = _maxThrusters;
     }
 
     // Update is called once per frame
@@ -85,6 +90,14 @@ public class Player : MonoBehaviour
                 ShootLaser();
             }
         }
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            _thrustersRemaining += Time.deltaTime / 2;
+        }
+        if (_thrustersRemaining > _maxThrusters)
+        {
+            _thrustersRemaining = _maxThrusters;
+        }
     }
     void CalculateMovement()
     {
@@ -92,9 +105,10 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 moveVector = new Vector3(horizontalInput, verticalInput, 0);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && _thrustersRemaining > 0)
         {
             moveVector *= _trusterMultiplier;
+            _thrustersRemaining -= Time.deltaTime;
         }
 
         if (_isSpeedBoost)

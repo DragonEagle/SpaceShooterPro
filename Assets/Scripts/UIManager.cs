@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image _livesImage;
     [SerializeField]
+    private Slider _thrustersSlider;
+    [SerializeField]
     private Text _gameOverText;
     [SerializeField]
     private Text _restartText;
@@ -30,6 +32,7 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + _player.Score;
         _ammoText.text = "Ammo: " + _player.Ammo;
         _shieldsText.text = "Shields: " + _player.Shields;
+        _thrustersSlider.value = _player.Thrusters;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _gameOver = false;
@@ -58,6 +61,10 @@ public class UIManager : MonoBehaviour
         if (_livesImage)
         {
             _livesImage.sprite = _livesSprites[_player.Lives];
+        }
+        if (_thrustersSlider)
+        {
+            _thrustersSlider.value = _player.Thrusters;
         }
         if (_player.Lives == 0) 
         {

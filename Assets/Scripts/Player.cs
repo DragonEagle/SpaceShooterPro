@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _tripleShotDuration = 5f;
     [SerializeField]
+    private GameObject _scatterShotPrefab;
+    [SerializeField]
+    private float _scatterShotDuration = 5f;
+    [SerializeField]
     private float _speedBoostDuration = 5f;
     [SerializeField]
     private GameObject _shieldVisual;
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
 
     private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
+    private bool _isScatterShot = false;
 //    private bool _isShieldsActive = false;
 
     private AudioSource audioSource;
@@ -122,10 +127,15 @@ public class Player : MonoBehaviour
     void ShootLaser()
     {
         _canFire = Time.time + _fireRate;
-        if (_isTripleShot)
+        if (_isTripleShot && !_isScatterShot)
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-        } else
+        }
+        else if (_isScatterShot)
+        {
+            Instantiate(_scatterShotPrefab, transform.position, Quaternion.identity);
+        }
+        else
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0f, 1.1f, 0f), Quaternion.identity);
         }
@@ -167,6 +177,16 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_tripleShotDuration);
         _isTripleShot = false;
+    }
+    public void ActivateScatterShot()
+    {
+        _isScatterShot = true;
+        StartCoroutine(CooldownScatterShot());
+    }
+    IEnumerator CooldownScatterShot()
+    {
+        yield return new WaitForSeconds(_scatterShotDuration);
+        _isScatterShot = false;
     }
     public void ActivateSpeedBoost()
     {

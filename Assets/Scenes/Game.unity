@@ -608,6 +608,7 @@ MonoBehaviour:
   - {fileID: 8531644496979565112, guid: 45d7355af4deea94897497cfeed174ae, type: 3}
   - {fileID: 677269388128894404, guid: 31a6526b61224bb4f8387f75ad038ed7, type: 3}
   - {fileID: 1040742511811860748, guid: 11033becb4f971e4e843313b69bf59fa, type: 3}
+  - {fileID: 2783932665970811715, guid: 62cf955ee71289247aaa23e738d48aa6, type: 3}
   player: {fileID: 1225708548}
 --- !u!4 &788021613
 Transform:
@@ -1047,6 +1048,9 @@ MonoBehaviour:
   _tripleShotPrefab: {fileID: 8896599801846454706, guid: cbb1c755aa93d224eb662c317e36d4d3,
     type: 3}
   _tripleShotDuration: 5
+  _scatterShotPrefab: {fileID: 8896599801846454706, guid: eb896ada7f1fa62409b97fa68c7ccdcc,
+    type: 3}
+  _scatterShotDuration: 5
   _speedBoostDuration: 5
   _shieldVisual: {fileID: 102240212}
   _rightEngineFire: {fileID: 1620095328}

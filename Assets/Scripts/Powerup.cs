@@ -48,6 +48,9 @@ public class Powerup : MonoBehaviour
                     case 4:
                         player.IncreaseHealth();
                         break;
+                    case 5:
+                        player.ActivateScatterShot();
+                        break;
                     default:
                         break;
 

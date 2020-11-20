@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private int _ammo = 15;
     private int _score=0;
     private int _shields = 0;
     [SerializeField]
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour
     public int Lives { get { return _lives; } }
     public int Score { get { return _score; } }
     public int Shields { get { return _shields; } }
+    public int Ammo { get { return _ammo; } }
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +73,7 @@ public class Player : MonoBehaviour
         CalculateMovement();
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))
         {
-            if (Time.time > _canFire)
+            if ((Time.time > _canFire) && _ammo > 0)
             {
                 ShootLaser();
             }
@@ -124,6 +127,7 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0f, 1.1f, 0f), Quaternion.identity);
         }
+        _ammo--;
         audioSource.clip = _laserSound;
         audioSource.Play();
     }

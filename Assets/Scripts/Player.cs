@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     private bool _isSpeedBoost = false;
     private bool _isTripleShot = false;
     private bool _isScatterShot = false;
+    private Camera _mainCamera;
 //    private bool _isShieldsActive = false;
 
     private AudioSource audioSource;
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
         //  Take the current position == Start position (0,0,0)
         transform.position = new Vector3(0,0,0);
         audioSource = GetComponent<AudioSource>();
+        _mainCamera = Camera.main;
         if (!audioSource) {
             Debug.LogError("The player doesn't have an audiosource");
         } else
@@ -169,6 +171,7 @@ public class Player : MonoBehaviour
             return;
         }
         _lives--;
+        StartCoroutine(ShakeCamera());
         audioSource.clip = _explosionSound;
         audioSource.Play();
         if (_lives == 0)
@@ -244,5 +247,32 @@ public class Player : MonoBehaviour
     public void AddToScore(int amount)
     {
         _score += amount;
+    }
+    IEnumerator ShakeCamera()
+    {
+        Vector3 origPos = _mainCamera.transform.position;
+        _mainCamera.transform.Translate(new Vector3(Random.Range(-0.1f,0.1f),Random.Range(-0.1f,0.1f),0));
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.position = origPos;
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.Translate(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0));
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.position = origPos;
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.Translate(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0));
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.position = origPos;
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.Translate(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0));
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.position = origPos;
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.Translate(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0));
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.position = origPos;
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.Translate(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0));
+        yield return new WaitForSeconds(0.05f);
+        _mainCamera.transform.position = origPos;
     }
 }

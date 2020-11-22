@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         _scoreText.text = "Score: " + _player.Score;
-        _ammoText.text = "Ammo: " + _player.Ammo;
+        _ammoText.text = "Ammo: " + _player.Ammo + "/" + _player.MaxAmmo;
         _shieldsText.text = "Shields: " + _player.Shields;
         _thrustersSlider.value = _player.Thrusters;
         _gameOverText.gameObject.SetActive(false);
@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         }
         if (_ammoText)
         {
-            _ammoText.text = "Ammo: " + _player.Ammo;
+            _ammoText.text = "Ammo: " + _player.Ammo + "/" + _player.MaxAmmo;
         }
         if (_shieldsText)
         {

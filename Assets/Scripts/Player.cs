@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     public int Score { get { return _score; } }
     public int Shields { get { return _shields; } }
     public int Ammo { get { return _ammo; } }
+    public int MaxAmmo { get {return _maxAmmo; } }
     public float Thrusters { get { return _thrustersRemaining / _maxThrusters; } }
 
     // Start is called before the first frame update

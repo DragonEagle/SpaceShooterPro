@@ -6,6 +6,8 @@ public class EnemyLaser : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 8;
+    [SerializeField]
+    private GameObject _explosionPrefab;
     private bool _reverse = false;
 
     // Update is called once per frame
@@ -48,6 +50,13 @@ public class EnemyLaser : MonoBehaviour
             {
                 player.Damage();
             }
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Powerup")
+        {
+            GameObject explosion = Instantiate(_explosionPrefab, other.transform.position, Quaternion.identity);
+            explosion.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }

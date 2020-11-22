@@ -39,19 +39,23 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Vector3.Distance(transform.position, _player.transform.position) < _ramDistance) && (transform.position.y > _player.transform.position.y))
+        if (_player)
         {
-            Vector3 moveVector = _player.transform.position - transform.position;
-            moveVector = moveVector.normalized;
-            transform.Translate(moveVector * _ramSpeed * Time.deltaTime);
-        } else
-        {
-            transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        }
-        if (transform.position.y < -5f)
-        {
-            float randomX = Random.Range(-9.5f, 9.5f);
-            transform.position = new Vector3(randomX, 8f, 0f);
+            if ((Vector3.Distance(transform.position, _player.transform.position) < _ramDistance) && (transform.position.y > _player.transform.position.y))
+            {
+                Vector3 moveVector = _player.transform.position - transform.position;
+                moveVector = moveVector.normalized;
+                transform.Translate(moveVector * _ramSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.down * _speed * Time.deltaTime);
+            }
+            if (transform.position.y < -5f)
+            {
+                float randomX = Random.Range(-9.5f, 9.5f);
+                transform.position = new Vector3(randomX, 8f, 0f);
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)

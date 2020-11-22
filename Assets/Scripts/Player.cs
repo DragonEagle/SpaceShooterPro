@@ -184,7 +184,8 @@ public class Player : MonoBehaviour
         audioSource.Play();
         if (_lives == 0)
         {
-            Destroy(gameObject, 2f);
+            AudioSource.PlayClipAtPoint(_explosionSound, transform.position);
+            Destroy(gameObject);
         } else if (_lives == 2)
         {
             _rightEngineFire.SetActive(true);

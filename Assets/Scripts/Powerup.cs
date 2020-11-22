@@ -9,12 +9,12 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private int _powerupID; // 0= TripleShot 1=Speed 2=Shield
     private AudioSource _audioSource;
-    private GameObject _player;
+    private Player _player;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        _player = FindObjectOfType<Player>().gameObject;
+        _player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -22,9 +22,12 @@ public class Powerup : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.C))
         {
-            Vector3 moveVector = _player.transform.position - transform.position;
-            moveVector = moveVector.normalized;
-            transform.Translate(moveVector * _speed * Time.deltaTime);
+            if (_player)
+            {
+                Vector3 moveVector = _player.transform.position - transform.position;
+                moveVector = moveVector.normalized;
+                transform.Translate(moveVector * _speed * Time.deltaTime);
+            }
         }
         else
         {

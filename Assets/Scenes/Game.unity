@@ -558,6 +558,7 @@ MonoBehaviour:
   - {fileID: 2413729138077977455, guid: 60a7560daa677e54aa0bfa2eea74c54c, type: 3}
   - {fileID: 7313891070460461204, guid: a4622e9a9ace9cf47a70e3814aa81301, type: 3}
   - {fileID: 8354153794925995309, guid: c6b1ea6501ca75141bf0ab41eecfc987, type: 3}
+  - {fileID: 8354153794925995309, guid: 8e1eb98fe2cee7349b91dd5af3e79ae5, type: 3}
   player: {fileID: 1225708548}
 --- !u!4 &788021613
 Transform:
@@ -1093,6 +1094,9 @@ MonoBehaviour:
   _scatterShotPrefab: {fileID: 8896599801846454706, guid: eb896ada7f1fa62409b97fa68c7ccdcc,
     type: 3}
   _scatterShotDuration: 5
+  _homingLaserPrefab: {fileID: 4251387107561700170, guid: e0b126d1da95e3746bb4d8de24e61aea,
+    type: 3}
+  _homingLaserDuration: 5
   _speedBoostDuration: 5
   _shieldVisual: {fileID: 102240212}
   _rightEngineFire: {fileID: 1620095328}

@@ -67,6 +67,9 @@ public class Powerup : MonoBehaviour
                         break;
                     case 6: player.ActivateReducedSpeed();
                         break;
+                    case 7:
+                        player.ActivateHomingLaser();
+                        break;
                     default:
                         break;
 

@@ -102,7 +102,15 @@ public class Enemy : MonoBehaviour
         {
             if (_canFire)
             {
-                Instantiate(_laserPrefab, transform.position + new Vector3(0, -1.4f, 0), Quaternion.identity);
+                GameObject laser = Instantiate(_laserPrefab, transform.position + new Vector3(0, -1.4f, 0), Quaternion.identity);
+                if (transform.position.y < _player.transform.position.y)
+                {
+                    EnemyLaser enemyLaser = laser.GetComponent<EnemyLaser>();
+                    if (enemyLaser)
+                    {
+                        enemyLaser.SetReverse();
+                    }
+                }
             }
             float randomWait = Random.Range(3f,7f);
             yield return new WaitForSeconds(randomWait);

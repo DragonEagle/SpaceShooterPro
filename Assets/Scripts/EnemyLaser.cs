@@ -6,15 +6,38 @@ public class EnemyLaser : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 8;
+    private bool _reverse = false;
 
     // Update is called once per frame
     void Update()
+    {
+        if (_reverse)
+        {
+            HandleReverseMovement();
+        } else
+        {
+            HandleMovement();
+        }
+    }
+    void HandleReverseMovement()
+    {
+        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        if (transform.position.y > 8)
+        {
+            Destroy(gameObject);
+        }
+    }
+    void HandleMovement()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
         if (transform.position.y < -8)
         {
             Destroy(gameObject);
         }
+    }
+    public void SetReverse()
+    {
+        _reverse = true;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

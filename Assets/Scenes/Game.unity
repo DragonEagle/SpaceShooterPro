@@ -645,6 +645,7 @@ MonoBehaviour:
   - {fileID: 677269388128894404, guid: 31a6526b61224bb4f8387f75ad038ed7, type: 3}
   - {fileID: 1040742511811860748, guid: 11033becb4f971e4e843313b69bf59fa, type: 3}
   - {fileID: 2783932665970811715, guid: 62cf955ee71289247aaa23e738d48aa6, type: 3}
+  - {fileID: 2413729138077977455, guid: 60a7560daa677e54aa0bfa2eea74c54c, type: 3}
   player: {fileID: 1225708548}
 --- !u!4 &788021613
 Transform:
@@ -1090,7 +1091,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Ammo: 15'
+  m_Text: 'Ammo: 15/15'
 --- !u!222 &1208684551
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1167,6 +1168,7 @@ MonoBehaviour:
   _maxThrusters: 5
   _speed: 5
   _boostedSpeed: 8.5
+  _reducedSpeed: 1.75
   _trusterMultiplier: 1.5
   _laserPrefab: {fileID: 4251387107561700170, guid: c980fdb9a129f4147a23ff60da2fee6a,
     type: 3}

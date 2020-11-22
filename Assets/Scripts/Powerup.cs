@@ -51,6 +51,8 @@ public class Powerup : MonoBehaviour
                     case 5:
                         player.ActivateScatterShot();
                         break;
+                    case 6: player.ActivateReducedSpeed();
+                        break;
                     default:
                         break;
 

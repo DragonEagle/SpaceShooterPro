@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _boostedSpeed = 8.5f;
     [SerializeField]
+    private float _reducedSpeed = 1.75f;
+    [SerializeField]
     private float _trusterMultiplier = 1.5f;
     [SerializeField]
     private GameObject _laserPrefab;
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
     private float _thrustersRemaining;
 
     private bool _isSpeedBoost = false;
+    private bool _isSpeedReduced = false;
     private bool _isTripleShot = false;
     private bool _isScatterShot = false;
     private Camera _mainCamera;
@@ -114,7 +117,11 @@ public class Player : MonoBehaviour
             _thrustersRemaining -= Time.deltaTime;
         }
 
-        if (_isSpeedBoost)
+        if (_isSpeedReduced)
+        {
+            moveVector *= _reducedSpeed;
+        }
+        else if (_isSpeedBoost)
         {
             moveVector *= _boostedSpeed;
         }
@@ -215,6 +222,16 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_speedBoostDuration);
         _isSpeedBoost = false;
+    }
+    public void ActivateReducedSpeed()
+    {
+        _isSpeedReduced = true;
+        StartCoroutine(CooldownSpeedReduce());
+    }
+    IEnumerator CooldownSpeedReduce()
+    {
+        yield return new WaitForSeconds(_speedBoostDuration);
+        _isSpeedReduced = false;
     }
     public void ActivateShields()
     {

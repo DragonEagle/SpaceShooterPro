@@ -8,16 +8,27 @@ public class Enemy : MonoBehaviour
     private float _speed = 4f;
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _shieldVisual;
+    [SerializeField]
+    private int _chanceOfShield = 3;
     private Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
     private bool _canFire = true;
+    private bool _hasShield = false;
 
     private void Start()
     {
         _player = FindObjectOfType<Player>();
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _hasShield = (Random.Range(0, 10) < _chanceOfShield);
+        if (_hasShield)
+        {
+            _shieldVisual.SetActive(true);
+        }
+
         StartCoroutine(RandomShoot());
     }
 
@@ -39,39 +50,37 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            _speed = 0;
-            if (_anim)
-            {
-                _anim.SetTrigger("OnEnemyDeath");
-            }
-            if (_audioSource)
-            {
-                _audioSource.Play();
-            }
-            _canFire = false;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(gameObject, 2.5f);
+            Dammage();
         }
         else if (other.transform.tag == "Laser")
         {
             Destroy(other.gameObject);
+            if (_hasShield) {
+                _hasShield = false;
+                _shieldVisual.SetActive(false);
+                return;
+            }
             if (_player)
             {
                 _player.AddToScore(10);
             }
-            _speed = 0;
-            if (_anim)
-            {
-                _anim.SetTrigger("OnEnemyDeath");
-            }
-            if (_audioSource)
-            {
-                _audioSource.Play();
-            }
-            _canFire = false;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(gameObject, 2.5f);
+            Dammage();
         }
+    }
+    private void Dammage()
+    {
+        _speed = 0;
+        if (_anim)
+        {
+            _anim.SetTrigger("OnEnemyDeath");
+        }
+        if (_audioSource)
+        {
+            _audioSource.Play();
+        }
+        _canFire = false;
+        Destroy(GetComponent<Collider2D>());
+        Destroy(gameObject, 2.5f);
     }
     IEnumerator RandomShoot()
     {

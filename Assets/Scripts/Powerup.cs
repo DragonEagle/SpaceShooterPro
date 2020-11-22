@@ -9,17 +9,28 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private int _powerupID; // 0= TripleShot 1=Speed 2=Shield
     private AudioSource _audioSource;
+    private GameObject _player;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _player = FindObjectOfType<Player>().gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        if(transform.position.y < -5f)
+        if (Input.GetKey(KeyCode.C))
+        {
+            Vector3 moveVector = _player.transform.position - transform.position;
+            moveVector = moveVector.normalized;
+            transform.Translate(moveVector * _speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        }
+        if (transform.position.y < -5f)
         {
             Destroy(gameObject);
         }

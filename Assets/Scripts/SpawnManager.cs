@@ -17,6 +17,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _powerUps;
     [SerializeField]
+    private GameObject[] _rarePowerUps;
+    [SerializeField]
     private Player player;
 
     // Start is called before the first frame update
@@ -47,7 +49,14 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(randomTime);
             float randomX = Random.Range(-9.5f, 9.5f);
             Vector3 position = new Vector3(randomX, 8f, 0f);
-            Instantiate(_powerUps[Random.Range(0,_powerUps.Length)], position, Quaternion.identity);
+            bool spawnRare = (Random.Range(0, 10) > 6);
+            if (spawnRare)
+            {
+                Instantiate(_rarePowerUps[Random.Range(0, _rarePowerUps.Length)], position, Quaternion.identity);
+            } else
+            {
+                Instantiate(_powerUps[Random.Range(0, _powerUps.Length)], position, Quaternion.identity);
+            }
         }
     }
 }

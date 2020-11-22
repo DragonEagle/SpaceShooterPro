@@ -22,9 +22,12 @@ public class Enemy : MonoBehaviour
     private bool _canFire = true;
     private bool _hasShield = false;
 
+    private SpawnManager _spawnManager;
+
     private void Start()
     {
         _player = FindObjectOfType<Player>();
+        _spawnManager = FindObjectOfType<SpawnManager>();
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _hasShield = (Random.Range(0, 10) < _chanceOfShield);
@@ -98,6 +101,7 @@ public class Enemy : MonoBehaviour
         }
         _canFire = false;
         Destroy(GetComponent<Collider2D>());
+        _spawnManager.DestroyEnemy(this);
         Destroy(gameObject, 2.5f);
     }
     IEnumerator RandomShoot()

@@ -7,6 +7,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
     [SerializeField]
+    private float _ramSpeed = 6f;
+    [SerializeField]
+    private float _ramDistance = 1f;
+    [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _shieldVisual;
@@ -35,10 +39,19 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        if (transform.position.y < -5f) {
+        if ((Vector3.Distance(transform.position, _player.transform.position) < _ramDistance) && (transform.position.y > _player.transform.position.y))
+        {
+            Vector3 moveVector = _player.transform.position - transform.position;
+            moveVector = moveVector.normalized;
+            transform.Translate(moveVector * _ramSpeed * Time.deltaTime);
+        } else
+        {
+            transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        }
+        if (transform.position.y < -5f)
+        {
             float randomX = Random.Range(-9.5f, 9.5f);
-            transform.position = new Vector3(randomX, 8f,0f);
+            transform.position = new Vector3(randomX, 8f, 0f);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -55,11 +68,6 @@ public class Enemy : MonoBehaviour
         else if (other.transform.tag == "Laser")
         {
             Destroy(other.gameObject);
-            if (_hasShield) {
-                _hasShield = false;
-                _shieldVisual.SetActive(false);
-                return;
-            }
             if (_player)
             {
                 _player.AddToScore(10);
@@ -69,6 +77,12 @@ public class Enemy : MonoBehaviour
     }
     private void Dammage()
     {
+        if (_hasShield)
+        {
+            _hasShield = false;
+            _shieldVisual.SetActive(false);
+            return;
+        }
         _speed = 0;
         if (_anim)
         {
